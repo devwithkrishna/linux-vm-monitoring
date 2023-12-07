@@ -25,7 +25,25 @@ jobs:
   start-or-stop-azure-virtual-machine:
     runs-on: ubuntu-latest  
     name: ${{ github.actor }} ${{ github.event.inputs.action }} ${{github.event.inputs.vm_name}} VM  
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      AZURE_SECRET: ${{ secrets.AZURE_SECRET }}
     steps:
     - name: echo inputs
       run: |
         echo " action ${{github.event.inputs.action}} vmname ${{github.event.inputs.vm_name}} "
+    - name: azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: az cli commands
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.55.0
+        inlinescript: |
+          az account set -s ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          az account show -o json
+          
+
