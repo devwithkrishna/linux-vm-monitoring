@@ -46,8 +46,8 @@ jobs:
         az vm start --name ${{ github.event.inputs.vm_name }} --resource-group ${{ github.event.inputs.resource_group }} --subscription ${{ github.event.inputs.subscription_name }}
         echo "Vm ${{ github.event.inputs.vm_name }} has been started"
         elif [[ "${{ github.event.inputs.action }}" == "stop" ]]; then
-        az vm stop --name ${{ github.event.inputs.vm_name }} --resource-group ${{ github.event.inputs.resource_group }} --subscription ${{ github.event.inputs.subscription_name }}
-        echo "Vm ${{ github.event.inputs.vm_name }} has been stopped"
+        az vm deallocate --name ${{ github.event.inputs.vm_name }} --resource-group ${{ github.event.inputs.resource_group }} --subscription ${{ github.event.inputs.subscription_name }}
+        echo "Vm ${{ github.event.inputs.vm_name }} has been stopped/deallocated"
         fi
         
 
