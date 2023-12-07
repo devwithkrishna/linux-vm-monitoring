@@ -17,19 +17,14 @@ on:
         required: true
         default: "DEV-WITH-KRISHNA-VM-RG"
         type: string
-      resource_provider_string:
+      subscription_name:
         required: true
-        default: "providers/Microsoft.Compute/virtualMachines"
+        default: "TECH-ARCHITECTS-NONPROD"
         type: string
 jobs:
   start-or-stop-azure-virtual-machine:
     runs-on: ubuntu-latest  
     name: ${{ github.actor }} ${{ github.event.inputs.action }} ${{github.event.inputs.vm_name}} VM  
-    env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_SECRET: ${{ secrets.AZURE_SECRET }}
     steps:
     - name: echo inputs
       run: |
@@ -45,5 +40,16 @@ jobs:
         inlinescript: |
           az account set -s ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           az account show -o json
+    - name: az vm start or stop
+      run: |
+        if [[ "${{ github.event.inputs.action }}" == "start" ]]; then
+        az vm start --name ${{ github.event.inputs.vm_name }} --resource-group ${{ github.event.inputs.resource_group }} --subscription ${{ github.event.inputs.subscription_name }}
+        echo "Vm ${{ github.event.inputs.vm_name }} has been started"
+        elif [[ "${{ github.event.inputs.action }}" == "stop" ]]; then
+        az vm stop --name ${{ github.event.inputs.vm_name }} --resource-group ${{ github.event.inputs.resource_group }} --subscription ${{ github.event.inputs.subscription_name }}
+        echo "Vm ${{ github.event.inputs.vm_name }} has been stopped"
+        fi
+        
+
 
 
