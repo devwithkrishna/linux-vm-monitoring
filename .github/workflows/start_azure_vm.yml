@@ -1,0 +1,27 @@
+name: start azure virtual machine
+run-name: ${{ github.actor }} - ${{ github.events.inputs.action }} VM
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        default: "stop"
+        required: true
+        type: choice
+        options:
+          - start
+          - stop
+      vm_name:
+        required: true
+        default: "devwithkrishna-vm"
+        type: string
+      resource_group:
+        required: true
+        default: "DEV-WITH-KRISHNA-VM-RG"
+        type: string
+      resource_provider_string:
+        required: true
+        default: "providers/Microsoft.Compute/virtualMachines"
+        type: string
+			
+			
+    
