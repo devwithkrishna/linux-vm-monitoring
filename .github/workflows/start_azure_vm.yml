@@ -24,7 +24,7 @@ on:
 jobs:
   start-or-stop-azure-virtual-machine:
     runs-on: ubuntu-latest  
-    name: ${{ github.actor }} ${{ github.events.inputs.action }} ${{github.events.inputs.vm_name}} VM  
+    name: ${{ github.actor }} ${{ github.event.inputs.action }} ${{github.event.inputs.vm_name}} VM  
     steps:
     - name: echo inputs
       run: |
