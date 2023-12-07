@@ -22,10 +22,10 @@ on:
         required: true
         default: "providers/Microsoft.Compute/virtualMachines"
         type: string
-        jobs:
-          start or stop azure virtual machine:
-          runs-on: ubuntu-latest
-          steps:
-            - name: echo inputs
-              run: |
-                echo " action ${{github.event.inputs.action}} vmname ${{github.event.inputs.vm_name}} "
+jobs:
+  start-or-stop-azure-virtual-machine:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo inputs
+      run: |
+        echo " action ${{github.event.inputs.action}} vmname ${{github.event.inputs.vm_name}} "
