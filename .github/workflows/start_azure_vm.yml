@@ -1,4 +1,4 @@
-name: start azure virtual machine
+name: start or stop azure virtual machine
 run-name: ${{ github.actor }} - ${{ github.events.inputs.action }} VM
 on:
   workflow_dispatch:
@@ -22,6 +22,10 @@ on:
         required: true
         default: "providers/Microsoft.Compute/virtualMachines"
         type: string
-			
-			
-    
+        jobs:
+          start or stop azure virtual machine:
+          runs-on: ubuntu-latest
+          steps:
+            - name: echo inputs
+              run: |
+                echo " action ${{github.event.inputs.action}} vmname ${{github.event.inputs.vm_name}} "
