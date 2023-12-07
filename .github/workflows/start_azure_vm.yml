@@ -22,9 +22,9 @@ on:
         default: "providers/Microsoft.Compute/virtualMachines"
         type: string
 jobs:
-  run-name: ${{ github.actor }} - ${{ github.events.inputs.action }} ${{github.events.inputs.vm_name}} VM
-  start-or-stop-azure-virtual-machine:  
+  start-or-stop-azure-virtual-machine:
     runs-on: ubuntu-latest  
+    name: ${{ github.actor }} ${{ github.events.inputs.action }} ${{github.events.inputs.vm_name}} VM  
     steps:
     - name: echo inputs
       run: |
