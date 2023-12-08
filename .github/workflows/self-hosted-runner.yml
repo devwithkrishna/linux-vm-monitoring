@@ -30,6 +30,14 @@ jobs:
       run: |
         echo " action ${{github.event.inputs.action}} vmname ${{github.event.inputs.vm_name}} "
         echo "Hi ${{github.actor}}..."
+    - name: vm details
+      run: |
+        cat /etc/os-release
+        echo "=================================="
+        cat /etc/hostname
+        echo "=================================="
+        uname -a
+        echo "=================================="
         
 
 
