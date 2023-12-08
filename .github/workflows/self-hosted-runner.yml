@@ -1,4 +1,4 @@
-name: start or stop azure virtual machine
+name: on self hosted runner
 on:
   workflow_dispatch:
     inputs:
@@ -22,7 +22,7 @@ on:
         default: "TECH-ARCHITECTS-NONPROD"
         type: string
 jobs:
-  start-or-stop-azure-virtual-machine:
+  on-self-hosted-runner:
     runs-on: self-hosted  
     name: ${{ github.actor }} ${{ github.event.inputs.action }} ${{github.event.inputs.vm_name}} VM  
     steps:
