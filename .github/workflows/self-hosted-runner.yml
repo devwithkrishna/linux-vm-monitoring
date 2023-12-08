@@ -1,0 +1,43 @@
+name: on self hosted runner
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        default: "stop"
+        required: true
+        type: choice
+        options:
+          - start
+          - stop
+      vm_name:
+        required: true
+        default: "devwithkrishna-vm"
+        type: string
+      resource_group:
+        required: true
+        default: "DEV-WITH-KRISHNA-VM-RG"
+        type: string
+      subscription_name:
+        required: true
+        default: "TECH-ARCHITECTS-NONPROD"
+        type: string
+jobs:
+  on-self-hosted-runner:
+    runs-on: self-hosted  
+    name: ${{ github.actor }} ${{ github.event.inputs.action }} ${{github.event.inputs.vm_name}} VM  
+    steps:
+    - name: echo inputs
+      run: |
+        echo " action ${{github.event.inputs.action}} vmname ${{github.event.inputs.vm_name}} "
+        echo "Hi ${{github.actor}}..."
+    - name: vm details
+      run: |
+        cat /etc/os-release
+        echo "=================================="
+        cat /etc/hostname
+        echo "=================================="
+        uname -a
+        echo "=================================="
+        
+
+
