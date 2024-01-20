@@ -21,6 +21,7 @@ on:
         required: true
         default: "TECH-ARCHITECTS-NONPROD"
         type: string
+run-name: ${{ inputs.action }} -${{ inputs.vm_name }} -triggered by ${{ github.actor }}
 jobs:
   start-or-stop-azure-virtual-machine:
     runs-on: ubuntu-latest  
